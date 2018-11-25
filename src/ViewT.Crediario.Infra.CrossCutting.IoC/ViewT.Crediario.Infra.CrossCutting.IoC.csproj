@@ -31,10 +31,28 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="SimpleInjector, Version=4.4.0.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\SimpleInjector.4.4.0\lib\net45\SimpleInjector.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BootStrapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ViewT.Crediario.Domain.Core\ViewT.Crediario.Domain.Core.csproj">
+      <Project>{0b4091bf-c27d-4809-9882-144cecaccb1b}</Project>
+      <Name>ViewT.Crediario.Domain.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ViewT.Crediario.Domain\ViewT.Crediario.Domain.csproj">
+      <Project>{919ddb7a-9c0d-4ebd-b181-a42383b7283e}</Project>
+      <Name>ViewT.Crediario.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ViewT.Crediario.Infra.Data\ViewT.Crediario.Infra.Data.csproj">
+      <Project>{34870977-7455-4669-bcff-429828aa3ef8}</Project>
+      <Name>ViewT.Crediario.Infra.Data</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

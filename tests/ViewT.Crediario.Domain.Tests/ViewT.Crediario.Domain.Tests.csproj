@@ -83,12 +83,40 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Unit\Main\Commands\Builders\UserAuthenticateCommandBuilder.cs" />
+    <Compile Include="Unit\Main\Commands\Builders\UserChangePasswordCommandBuilder.cs" />
+    <Compile Include="Unit\Main\Commands\Builders\UserForgotPasswordCommandBuilder.cs" />
+    <Compile Include="Unit\Main\Commands\Builders\UserRegisterCommandBuilder.cs" />
+    <Compile Include="Unit\Main\Commands\EventHandlers\UserForgotPasswordRequestedEventHandlerTests.cs" />
+    <Compile Include="Unit\Main\Commands\Handlers\UserAuthenticateCommandHandlerTests.cs" />
+    <Compile Include="Unit\Main\Commands\Handlers\UserChangePasswordCommandHandlerTests.cs" />
+    <Compile Include="Unit\Main\Commands\Handlers\UserForgotPasswordCommandHandlerTests.cs" />
+    <Compile Include="Unit\Main\Commands\Handlers\UserRegisterCommandHandlerTests.cs" />
+    <Compile Include="Unit\Main\Commands\Scopes\UserCommandScopesTests.cs" />
+    <Compile Include="Unit\Main\Entities\Builders\DeviceBuilder.cs" />
+    <Compile Include="Unit\Main\Entities\Builders\EmailNotificationBuilder.cs" />
+    <Compile Include="Unit\Main\Entities\Builders\PersonBuilder.cs" />
+    <Compile Include="Unit\Main\Entities\Builders\TokenBuilder.cs" />
+    <Compile Include="Unit\Main\Entities\Builders\VersionBuilder.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\..\packages\xunit.analyzers.0.10.0\analyzers\dotnet\cs\xunit.analyzers.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\ViewT.Crediario.Domain.Core\ViewT.Crediario.Domain.Core.csproj">
+      <Project>{0B4091BF-C27D-4809-9882-144CECACCB1B}</Project>
+      <Name>ViewT.Crediario.Domain.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\ViewT.Crediario.Domain\ViewT.Crediario.Domain.csproj">
+      <Project>{919DDB7A-9C0D-4EBD-B181-A42383B7283E}</Project>
+      <Name>ViewT.Crediario.Domain</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Unit\Main\Commands\Inputs\" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

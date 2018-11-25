@@ -31,7 +31,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -41,10 +48,37 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Context\CrediarioContext.cs" />
+    <Compile Include="EntityConfig\DeviceConfig.cs" />
+    <Compile Include="EntityConfig\EmailNotificationConfig.cs" />
+    <Compile Include="EntityConfig\PersonConfig.cs" />
+    <Compile Include="EntityConfig\TokenConfig.cs" />
+    <Compile Include="EntityConfig\VersionConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RepositoryFake\DeviceFakeRepository.cs" />
+    <Compile Include="RepositoryFake\EmailNotificationFakeRepository.cs" />
+    <Compile Include="RepositoryFake\TokenFakeRepository.cs" />
+    <Compile Include="RepositoryFake\UserFakeRepository.cs" />
+    <Compile Include="RepositoryFake\VersionFakeRepository.cs" />
+    <Compile Include="Repository\Repository.cs" />
+    <Compile Include="UoW\UnitOfWork.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\tests\ViewT.Crediario.Domain.Tests\ViewT.Crediario.Domain.Tests.csproj">
+      <Project>{de660c6c-dd7f-4f83-87db-70ce23ae9bc7}</Project>
+      <Name>ViewT.Crediario.Domain.Tests</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ViewT.Crediario.Domain.Core\ViewT.Crediario.Domain.Core.csproj">
+      <Project>{0b4091bf-c27d-4809-9882-144cecaccb1b}</Project>
+      <Name>ViewT.Crediario.Domain.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ViewT.Crediario.Domain\ViewT.Crediario.Domain.csproj">
+      <Project>{919ddb7a-9c0d-4ebd-b181-a42383b7283e}</Project>
+      <Name>ViewT.Crediario.Domain</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
