@@ -34,6 +34,25 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\Command.cs" />
+    <Compile Include="Commands\CommandResponse.cs" />
+    <Compile Include="Commands\IAppImageCommandHandler.cs" />
+    <Compile Include="Commands\ICommand.cs" />
+    <Compile Include="Commands\ICommandHandler.cs" />
+    <Compile Include="Commands\ICommandResult.cs" />
+    <Compile Include="DomainNotification\AssertionConcern.cs" />
+    <Compile Include="DomainNotification\Events\Contracts\IDomainEvent.cs" />
+    <Compile Include="DomainNotification\Events\DomainEvent.cs" />
+    <Compile Include="DomainNotification\Events\DomainNotification.cs" />
+    <Compile Include="DomainNotification\Events\IDomainNotificationHandler.cs" />
+    <Compile Include="DomainNotification\Exceptions\RaiseEventException.cs" />
+    <Compile Include="DomainNotification\Handlers\DomainNotificationHandler.cs" />
+    <Compile Include="DomainNotification\IContainer.cs" />
+    <Compile Include="DomainNotification\IHandler.cs" />
+    <Compile Include="Models\Entity.cs" />
+    <Compile Include="Models\Enumeration.cs" />
+    <Compile Include="Models\IEnumeration.cs" />
+    <Compile Include="Models\ValueObject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
