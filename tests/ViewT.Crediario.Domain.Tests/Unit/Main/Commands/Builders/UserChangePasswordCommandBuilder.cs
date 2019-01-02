@@ -4,22 +4,15 @@ namespace ViewT.Crediario.Domain.Tests.Unit.Main.Commands.Builders
 {
     public class UserChangePasswordCommandBuilder
     {
-        private string _identification = null;
         private string _serialKey = null;
         private string _oldPassword = null;
         private string _newPassword = null;
 
         public UserChangePasswordCommand Build()
         {
-            var authenticateUserCommand = new UserChangePasswordCommand(_identification, _serialKey, _oldPassword, _newPassword);
+            var authenticateUserCommand = new UserChangePasswordCommand(_serialKey, _oldPassword, _newPassword);
 
             return authenticateUserCommand;
-        }
-
-        public UserChangePasswordCommandBuilder WithIdentification(string identification)
-        {
-            this._identification = identification;
-            return this;
         }
 
         public UserChangePasswordCommandBuilder WithSerialKey(string serialKey)

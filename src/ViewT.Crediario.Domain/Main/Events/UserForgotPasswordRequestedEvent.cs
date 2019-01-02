@@ -6,12 +6,14 @@ namespace ViewT.Crediario.Domain.Main.Events
 {
     public class UserForgotPasswordRequestedEvent : IDomainEvent
     {
-        public UserForgotPasswordRequestedEvent(Person person)
+        public UserForgotPasswordRequestedEvent(Person person, string plainNewPassword)
         {
             Person = person;
+            PlainNewPassword = plainNewPassword;
             Date = DateTime.Now;
         }
         public Person Person { get; private set; }
+        public string PlainNewPassword { get; private set; }
         public DateTime Date { get; }
     }
 }

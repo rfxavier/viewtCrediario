@@ -6,14 +6,11 @@ namespace ViewT.Crediario.Domain.Tests.Unit.Main.Commands.Builders
     {
         private string _user = null;
         private string _password = null;
-        private string _identification = null;
-        private int _deviceOs = 1;
-        private string _deviceModel = null;
-        private string _versionOs = null;
+        private string _pushToken = null;
 
         public UserAuthenticateCommand Build()
         {
-            var authenticateUserCommand = new UserAuthenticateCommand(_user, _password, _identification, _deviceOs, _deviceModel, _versionOs);
+            var authenticateUserCommand = new UserAuthenticateCommand(_user, _password, _pushToken);
 
             return authenticateUserCommand;
         }
@@ -30,9 +27,9 @@ namespace ViewT.Crediario.Domain.Tests.Unit.Main.Commands.Builders
             return this;
         }
 
-        public UserAuthenticateCommandBuilder WithIdentification(string identification)
+        public UserAuthenticateCommandBuilder WithPushToken(string pushToken)
         {
-            this._identification = identification;
+            this._pushToken = pushToken;
             return this;
         }
 

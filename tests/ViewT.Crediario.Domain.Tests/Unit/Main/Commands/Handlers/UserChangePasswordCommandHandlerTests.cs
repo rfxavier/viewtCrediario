@@ -1,8 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using AutoMoq;
+﻿using AutoMoq;
 using FluentAssertions;
 using Moq;
+using System;
+using System.Collections.Generic;
+using ViewT.Condominio.Domain.Core.DomainNotification.Events;
+using ViewT.Condominio.Domain.Main.Commands.Handlers;
+using ViewT.Condominio.Domain.Main.Interfaces;
+using ViewT.Condominio.Domain.Tests.Unit.Main.Commands.Builders;
+using ViewT.Condominio.Domain.Tests.Unit.Main.Entities.Builders;
 using ViewT.Crediario.Domain.Core.DomainNotification.Events;
 using ViewT.Crediario.Domain.Main.Commands.Handlers;
 using ViewT.Crediario.Domain.Main.Commands.Inputs;
@@ -11,7 +16,7 @@ using ViewT.Crediario.Domain.Tests.Unit.Main.Commands.Builders;
 using ViewT.Crediario.Domain.Tests.Unit.Main.Entities.Builders;
 using Xunit;
 
-namespace ViewT.Crediario.Domain.Tests.Unit.Main.Commands.Handlers
+namespace ViewT.Condominio.Domain.Tests.Unit.Main.Commands.Handlers
 {
     public class UserChangePasswordCommandHandlerTests
     {
@@ -36,7 +41,6 @@ namespace ViewT.Crediario.Domain.Tests.Unit.Main.Commands.Handlers
             DomainEvent.Register<DomainNotification>(dn => _notifications.Add(dn));
 
             var invalidCommand = new UserChangePasswordCommandBuilder()
-                .WithIdentification(null)
                 .WithSerialKey(null);
 
             var handler = _mocker.Resolve<UserCommandHandler>();
@@ -61,7 +65,6 @@ namespace ViewT.Crediario.Domain.Tests.Unit.Main.Commands.Handlers
             DomainEvent.Register<DomainNotification>(dn => _notifications.Add(dn));
 
             var command = (UserChangePasswordCommand) new UserChangePasswordCommandBuilder()
-                .WithIdentification(Guid.NewGuid().ToString())
                 .WithSerialKey(Guid.NewGuid().ToString());
 
             _mocker.GetMock<IPersonRepository>()
@@ -80,7 +83,7 @@ namespace ViewT.Crediario.Domain.Tests.Unit.Main.Commands.Handlers
                 .And.Contain(n => n.Value == Domain.Main.Resources.Messages.UserNotFound);
 
             _mocker.GetMock<IPersonRepository>().Verify(u => u.GetBySerialKey(It.IsAny<string>()),Times.Once());
-            _mocker.GetMock<IDeviceRepository>().Verify(u => u.GetByIdentification(It.IsAny<string>()),Times.Once());
+            _mocker.GetMock<IDeviceRepository>().Verify(u => u.GetByDeviceIdentificationIncludingPerson(It.IsAny<string>()),Times.Once());
         }
 
 
@@ -93,16 +96,15 @@ namespace ViewT.Crediario.Domain.Tests.Unit.Main.Commands.Handlers
             DomainEvent.Register<DomainNotification>(dn => _notifications.Add(dn));
 
             var command = (UserChangePasswordCommand) new UserChangePasswordCommandBuilder()
-                .WithIdentification(Guid.NewGuid().ToString())
                 .WithSerialKey(Guid.NewGuid().ToString());
 
             _mocker.GetMock<IPersonRepository>()
                 .Setup(u => u.GetBySerialKey(command.SerialKey))
                 .Returns(new PersonBuilder());
 
-            _mocker.GetMock<IDeviceRepository>()
-                .Setup(d => d.GetByIdentification(command.Identification))
-                .Returns(() => null);
+            //_mocker.GetMock<IDeviceRepository>()
+            //    .Setup(d => d.GetByDeviceIdentificationIncludingPerson(command.Identification))
+            //    .Returns(() => null);
 
             var handler = _mocker.Resolve<UserCommandHandler>();
 
@@ -116,7 +118,7 @@ namespace ViewT.Crediario.Domain.Tests.Unit.Main.Commands.Handlers
                 .And.Contain(n => n.Value == Domain.Main.Resources.Messages.UserChangePasswordDeviceNotFound);
 
             _mocker.GetMock<IPersonRepository>().Verify(u => u.GetBySerialKey(It.IsAny<string>()),Times.Once());
-            _mocker.GetMock<IDeviceRepository>().Verify(u => u.GetByIdentification(It.IsAny<string>()),Times.Once());
+            _mocker.GetMock<IDeviceRepository>().Verify(u => u.GetByDeviceIdentificationIncludingPerson(It.IsAny<string>()),Times.Once());
         }
 
 
@@ -128,17 +130,16 @@ namespace ViewT.Crediario.Domain.Tests.Unit.Main.Commands.Handlers
             //Arrange
             DomainEvent.Register<DomainNotification>(dn => _notifications.Add(dn));
 
-            var command = (UserChangePasswordCommand)new UserChangePasswordCommandBuilder()
-                .WithSerialKey(Guid.NewGuid().ToString())
-                .WithIdentification(Guid.NewGuid().ToString());
+            var command = (UserChangePasswordCommand) new UserChangePasswordCommandBuilder()
+                .WithSerialKey(Guid.NewGuid().ToString());
 
             _mocker.GetMock<IPersonRepository>()
                 .Setup(u => u.GetBySerialKey(command.SerialKey))
                 .Returns(() => new PersonBuilder().WithPersonId(Guid.NewGuid()));
 
-            _mocker.GetMock<IDeviceRepository>()
-                .Setup(d => d.GetByIdentification(command.Identification))
-                .Returns(() => new DeviceBuilder().WithPerson(new PersonBuilder().WithPersonId(Guid.NewGuid())));
+            //_mocker.GetMock<IDeviceRepository>()
+            //    .Setup(d => d.GetByDeviceIdentificationIncludingPerson(command.Identification))
+            //    .Returns(() => new DeviceBuilder().WithPerson(new PersonBuilder().WithPersonId(Guid.NewGuid())));
 
             var handler = _mocker.Resolve<UserCommandHandler>();
 
@@ -152,7 +153,7 @@ namespace ViewT.Crediario.Domain.Tests.Unit.Main.Commands.Handlers
                 .And.Contain(n => n.Value == Domain.Main.Resources.Messages.UserChangePasswordDeviceDoesNotBelongToUser);
 
             _mocker.GetMock<IPersonRepository>().Verify(u => u.GetBySerialKey(It.IsAny<string>()),Times.Once());
-            _mocker.GetMock<IDeviceRepository>().Verify(u => u.GetByIdentification(It.IsAny<string>()),Times.Once());
+            _mocker.GetMock<IDeviceRepository>().Verify(u => u.GetByDeviceIdentificationIncludingPerson(It.IsAny<string>()),Times.Once());
         }
 
 
@@ -165,8 +166,7 @@ namespace ViewT.Crediario.Domain.Tests.Unit.Main.Commands.Handlers
             DomainEvent.Register<DomainNotification>(dn => _notifications.Add(dn));
 
             var command = (UserChangePasswordCommand)new UserChangePasswordCommandBuilder()
-                .WithSerialKey(Guid.NewGuid().ToString())
-                .WithIdentification(Guid.NewGuid().ToString());
+                .WithSerialKey(Guid.NewGuid().ToString());
 
             var userId = Guid.NewGuid();
 
@@ -174,12 +174,12 @@ namespace ViewT.Crediario.Domain.Tests.Unit.Main.Commands.Handlers
                 .Setup(u => u.GetBySerialKey(command.SerialKey))
                 .Returns(() => new PersonBuilder().WithPersonId(userId));
 
-            _mocker.GetMock<IDeviceRepository>()
-                .Setup(d => d.GetByIdentification(command.Identification))
-                .Returns(() => new DeviceBuilder().WithPerson(new PersonBuilder().WithPersonId(userId)));
+            //_mocker.GetMock<IDeviceRepository>()
+            //    .Setup(d => d.GetByDeviceIdentificationIncludingPerson(command.Identification))
+            //    .Returns(() => new DeviceBuilder().WithPerson(new PersonBuilder().WithPersonId(userId)));
 
             _mocker.GetMock<IPersonRepository>()
-                .Setup(u => u.GetByUserNameAndPassword(It.IsAny<string>(), It.IsAny<string>()))
+                .Setup(u => u.GetByEmailAndPassword(It.IsAny<string>(), It.IsAny<string>()))
                 .Returns(() => new PersonBuilder());
 
             var handler = _mocker.Resolve<UserCommandHandler>();
@@ -192,7 +192,7 @@ namespace ViewT.Crediario.Domain.Tests.Unit.Main.Commands.Handlers
                 .BeEmpty();
 
             _mocker.GetMock<IPersonRepository>().Verify(u => u.GetBySerialKey(It.IsAny<string>()), Times.Once());
-            _mocker.GetMock<IDeviceRepository>().Verify(u => u.GetByIdentification(It.IsAny<string>()), Times.Once());
+            _mocker.GetMock<IDeviceRepository>().Verify(u => u.GetByDeviceIdentificationIncludingPerson(It.IsAny<string>()), Times.Once());
         }
 
 

@@ -11,7 +11,7 @@ using ViewT.Crediario.Domain.Tests.Unit.Main.Commands.Builders;
 using ViewT.Crediario.Domain.Tests.Unit.Main.Entities.Builders;
 using Xunit;
 
-namespace ViewT.Crediario.Domain.Tests.Unit.Main.Commands.Scopes
+namespace ViewT.Condominio.Domain.Tests.Unit.Main.Commands.Scopes
 {
     public class UserCommandScopesTests
     {
@@ -483,52 +483,6 @@ namespace ViewT.Crediario.Domain.Tests.Unit.Main.Commands.Scopes
                 .And.HaveCount(1)
                 .And.Contain(n => n.Value == Domain.Main.Resources.Messages.UserForgotPasswordEmailProper);
         }
-
-
-        [Fact(DisplayName = "HasIdentification Success")]
-        [Trait("Category", "UserChangePasswordCommand Scopes")]
-        public void
-            RegisterNewUserCommand_WithValidIdentification_HasIdentification_MustReturnSuccess()
-        {
-            //Arrange
-            DomainEvent.Register<DomainNotification>(dn => _notifications.Add(dn));
-
-            var userChangePasswordCommand = (UserChangePasswordCommand)new UserChangePasswordCommandBuilder()
-                .WithIdentification(Guid.NewGuid().ToString());
-
-            //Act
-
-
-            //Assert
-            userChangePasswordCommand.HasIdentification().Should().BeTrue();
-
-            _notifications.Should().BeEmpty();
-        }
-
-        [Fact(DisplayName = "HasIdentification Null")]
-        [Trait("Category", "UserChangePasswordCommand Scopes")]
-        public void
-            RegisterNewUserCommand_WithNullIdentification_HasIdentification_MustReturnAllErrors()
-        {
-            //Arrange
-            DomainEvent.Register<DomainNotification>(dn => _notifications.Add(dn));
-
-            var userChangePasswordCommand = (UserChangePasswordCommand)new UserChangePasswordCommandBuilder()
-                .WithIdentification(null);
-
-            //Act
-
-
-            //Assert
-            userChangePasswordCommand.HasIdentification().Should().BeFalse();
-
-            _notifications.Should()
-                .NotBeEmpty()
-                .And.HaveCount(1)
-                .And.Contain(n => n.Value == Domain.Main.Resources.Messages.UserChangePasswordIdentificationRequired);
-        }
-
-
 
         [Fact(DisplayName = "HasSerialKey Success")]
         [Trait("Category", "UserChangePasswordCommand Scopes")]

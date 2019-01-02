@@ -46,11 +46,14 @@
     <Compile Include="Main\Commands\Inputs\UserForgotPasswordCommandScopes.cs" />
     <Compile Include="Main\Commands\Inputs\UserRegisterCommand.cs" />
     <Compile Include="Main\Commands\Inputs\UserRegisterCommandScopes.cs" />
+    <Compile Include="Main\Commands\Inputs\UserUpdatePushTokenCommand.cs" />
+    <Compile Include="Main\Commands\Inputs\UserUpdatePushTokenCommandScopes.cs" />
     <Compile Include="Main\Commands\Results\GetMinimumVersionCommandResult.cs" />
     <Compile Include="Main\Commands\Results\UserAuthenticateCommandResult.cs" />
     <Compile Include="Main\Commands\Results\UserChangePasswordCommandResult.cs" />
     <Compile Include="Main\Commands\Results\UserForgotPasswordCommandResult.cs" />
     <Compile Include="Main\Commands\Results\UserRegisterCommandResult.cs" />
+    <Compile Include="Main\Commands\Results\UserUpdatePushTokenCommandResult.cs" />
     <Compile Include="Main\Entities\Device.cs" />
     <Compile Include="Main\Entities\EmailNotification.cs" />
     <Compile Include="Main\Entities\Person.cs" />
@@ -60,7 +63,7 @@
     <Compile Include="Main\Enums\DeviceStatus.cs" />
     <Compile Include="Main\Enums\PersonUserStatus.cs" />
     <Compile Include="Main\Events\UserForgotPasswordRequestedEvent.cs" />
-    <Compile Include="Main\Events\UserForgotPasswordRequestedEventHandlerForEmailNotification.cs" />
+    <Compile Include="Main\Events\UserForgotPasswordRequestedEventHandler.cs" />
     <Compile Include="Main\Interfaces\IDeviceRepository.cs" />
     <Compile Include="Main\Interfaces\IEmailNotificationRepository.cs" />
     <Compile Include="Main\Interfaces\IPersonRepository.cs" />
@@ -71,6 +74,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Messages.resx</DependentUpon>
     </Compile>
+    <Compile Include="Main\Services\ValidationService.cs" />
+    <Compile Include="Main\Services\ValidationServiceScopes.cs" />
     <Compile Include="Main\ValueObjects\CEP\CEP.cs" />
     <Compile Include="Main\ValueObjects\CNPJ\CNPJ.cs" />
     <Compile Include="Main\ValueObjects\CPF\CPF.cs" />
@@ -81,9 +86,7 @@
     <Compile Include="Main\ValueObjects\Telefone\Telefone.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Main\Services\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\ViewT.Crediario.Domain.Core\ViewT.Crediario.Domain.Core.csproj">
       <Project>{0b4091bf-c27d-4809-9882-144cecaccb1b}</Project>

@@ -5,6 +5,6 @@ namespace ViewT.Crediario.Domain.Main.Commands.Results
 {
     public class UserRegisterCommandResult : ICommandResult
     {
-        public Guid UserId { get; set; }
+        public string SerialKey { get; set; }
     }
 }

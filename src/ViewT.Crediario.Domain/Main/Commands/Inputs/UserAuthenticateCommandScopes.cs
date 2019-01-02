@@ -28,7 +28,7 @@ namespace ViewT.Crediario.Domain.Main.Commands.Inputs
 
         public static bool HasActiveUser(this UserAuthenticateCommand userAuthenticateCommand, Person person)
         {
-            return AssertionConcern.IsSatisfiedBy(AssertionConcern.AssertTrue(person != null && person.PersonUserStatus == PersonUserStatus.Active, Resources.Messages.UserAuthenticateUserIsInactive));
+            return AssertionConcern.IsSatisfiedBy(AssertionConcern.AssertTrue(person != null && person.PersonUserStatus.Value == PersonUserStatus.Active.Value, Resources.Messages.UserAuthenticateUserIsInactive));
         }
     }
 }

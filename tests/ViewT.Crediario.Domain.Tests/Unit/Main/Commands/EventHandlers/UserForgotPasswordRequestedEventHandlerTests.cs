@@ -32,7 +32,7 @@ namespace ViewT.Crediario.Domain.Tests.Unit.Main.Commands.EventHandlers
             UserForgotPasswordEventHandler_HandlerForEmailNotificationHandle_ShouldAddProperEmailNotification()
         {
             //Arrange
-            UserForgotPasswordRequestedEventHandlerForEmailNotification handlerEmailNotification = null;
+            UserForgotPasswordRequestedEventHandler handlerEmailNotification = null;
 
             DomainEvent.Register<UserForgotPasswordRequestedEvent>(ev =>
             {
@@ -56,7 +56,7 @@ namespace ViewT.Crediario.Domain.Tests.Unit.Main.Commands.EventHandlers
                 })
                 .Returns(() => emailNotification);
 
-            handlerEmailNotification = _mocker.Resolve<UserForgotPasswordRequestedEventHandlerForEmailNotification>();
+            handlerEmailNotification = _mocker.Resolve<UserForgotPasswordRequestedEventHandler>();
 
             //Act
             handlerEmailNotification.Handle(new UserForgotPasswordRequestedEvent(person));

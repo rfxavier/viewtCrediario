@@ -6,12 +6,6 @@ namespace ViewT.Crediario.Domain.Main.Commands.Inputs
 {
     public static class UserChangePasswordCommandScopes
     {
-        public static bool HasIdentification(this UserChangePasswordCommand command)
-        {
-            return AssertionConcern.IsSatisfiedBy(AssertionConcern.AssertNotNull(command.Identification,
-                Resources.Messages.UserChangePasswordIdentificationRequired));
-        }
-
         public static bool HasSerialKey(this UserChangePasswordCommand command)
         {
             return AssertionConcern.IsSatisfiedBy(AssertionConcern.AssertNotNull(command.SerialKey, Resources.Messages.SerialKeyRequired));

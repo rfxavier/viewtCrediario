@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using AutoMoq;
+﻿using AutoMoq;
 using FluentAssertions;
 using Moq;
+using System.Collections.Generic;
 using ViewT.Crediario.Domain.Core.Commands;
 using ViewT.Crediario.Domain.Core.DomainNotification.Events;
 using ViewT.Crediario.Domain.Core.Interfaces;
@@ -14,7 +14,7 @@ using ViewT.Crediario.Domain.Tests.Unit.Main.Commands.Builders;
 using ViewT.Crediario.Domain.Tests.Unit.Main.Entities.Builders;
 using Xunit;
 
-namespace ViewT.Crediario.Domain.Tests.Unit.Main.Commands.Handlers
+namespace ViewT.Condominio.Domain.Tests.Unit.Main.Commands.Handlers
 {
     public class UserForgotPasswordCommandHandlerTests
     {

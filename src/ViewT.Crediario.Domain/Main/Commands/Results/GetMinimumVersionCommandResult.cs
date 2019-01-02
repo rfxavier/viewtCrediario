@@ -2,6 +2,6 @@
 {
     public class GetMinimumVersionCommandResult
     {
-        public int MinimumVersion { get; set; }
+        public int? MinimumVersion { get; set; }
     }
 }
